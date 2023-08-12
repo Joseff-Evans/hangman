@@ -31,31 +31,31 @@ body {
 
 .wordContainer {
     display: flex;
-    justify-Content: center;
+    justify-content: center;
     gap: 0.5rem;
-    font-Size: 4em;
+    font-size: 4em;
     padding-bottom: 1rem;  
 }
 
 .wordContainer .letters {
     border-bottom: .3rem solid;
     width: 2.4rem;
-    text-Align: "center";
+    text-align: "center";
 }
 
 .letterContainer {
     display: flex;
-    flex-Wrap: wrap;
-    justify-Content: center;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 0.7rem;
-    font-Size: 1rem;
+    font-size: 1rem;
     padding: 0 2rem 4rem;
 }
 
 .letterContainer button {
     width: 3rem;
     height: 3rem;
-    border-Radius: 20% 20% 50% 50%;
+    border-radius: 20% 20% 50% 50%;
     background: rgba(0,0,0,0);
     font-size: 1.6rem; 
     border: 2px solid;
@@ -87,6 +87,6 @@ body {
 
 .resetBanner h2 {
     margin: 0;
-    font-Size: 1.3rem;
+    font-size: 1.3rem;
     padding: 1em;
 }
