@@ -35,10 +35,25 @@ body {
     gap: 0.5rem;
     font-size: 4em;
     padding-bottom: 1rem;  
+    flex-wrap: wrap;
 }
 
-.wordContainer .letters {
+.wordContainer .word {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    padding: 0 1rem;
+}
+
+.wordContainer .azLetters {
     border-bottom: .3rem solid;
+    width: 2.4rem;
+    text-align: "center";
+}
+
+.wordContainer .otherLetters {
+    border-bottom: .3rem solid transparent;
     width: 2.4rem;
     text-align: "center";
 }

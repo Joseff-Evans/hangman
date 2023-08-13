@@ -1,12 +1,12 @@
 import { useCallback, useEffect, useState } from "react"
-import words from "./util/words.json"
 import HangmanDrawingSVG from "./util/hangmanSVG.tsx"
+import champs from "./util/champs.json"
 import "./styles.css"
 
 function App() {
-  
+
   const getWord = () : string => {
-    let word = words[Math.floor(Math.random() * words.length)]
+    let word = champs[Math.floor(Math.random() * champs.length)]; 
     return word.charAt(0).toUpperCase() + word.substr(1).toLowerCase();
   };
 
@@ -33,6 +33,10 @@ function App() {
   );
 
   useEffect(() => {
+    setGuessedLetters(word.split('').filter((letter) => !allLetters.includes(letter.toUpperCase())));
+  },[word])
+
+  useEffect(() => {
     if ( isGuessed ) { 
       setStreak((prev) => prev + 1);
     } else if ( currentGuesses >= maxGuesses ) {
@@ -49,7 +53,7 @@ function App() {
         resetHangman();
       }
 
-      if (!key.match(/^[a-z A-Z]$/)) return
+      if (!key.match(/^[a-zA-Z]$/)) return
 
       addGuessLetter(key);
       
@@ -82,10 +86,14 @@ function App() {
     </div>
 
     <div className="wordContainer">{
-    word.split('').map((letter, index) => 
-      <div className="letters" key={index}>
-        {guessedLetters.includes(letter.toUpperCase()) ? isGuessed ? <span style={{color:"green"}}>{letter}</span> : <span>{letter}</span> : currentGuesses < maxGuesses ? <span>&nbsp;</span> : <span style={{color:"red"}}>{letter}</span>}
+      word.split(' ').map((word, index) => 
+      <div className="word" key={index}>
+      {word.split('').map((letter, index) => 
+      <div className={allLetters.includes(letter.toUpperCase()) ? "azLetters" : "otherLetters"} key={index}>
+        {guessedLetters.includes(letter.toUpperCase()) ? isGuessed ? <span style={{color:"green"}}>{letter}</span> : <span>{letter}</span> : currentGuesses < maxGuesses ? <span>&nbsp;</span> : <span style={{color:"red"}}>{letter}</span>
+        }
       </div>
+    )}</div>
     )
     }
     </div>
