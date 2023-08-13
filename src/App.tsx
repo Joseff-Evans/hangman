@@ -5,24 +5,25 @@ import "./styles.css"
 
 function App() {
 
-  const getWord = () : string => {
-    let word = champs[Math.floor(Math.random() * champs.length)]; 
-    return word.charAt(0).toUpperCase() + word.substr(1).toLowerCase();
-  };
-
-  const [word, setWord] = useState<string>( getWord );
+  const [word, setWord] = useState<string>("");
   const [guessedLetters, setGuessedLetters] = useState<string[]>([]);
   const [streak, setStreak] = useState<number>(0);
 
-  const allLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split('');
   const maxGuesses = 10;
+  const allLetters : string[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split('');
 
   const currentGuesses = guessedLetters.filter((letter) => !word.toUpperCase().includes(letter)).length;
   const isGuessed = word.length === word.toUpperCase().split('').filter((letter) => guessedLetters.includes(letter)).length;
 
-  const resetHangman = () => {
-    setGuessedLetters([]);
-    setWord(getWord);
+  useEffect(() => {
+    updateWord();
+  },[])
+
+  function updateWord() {
+    let word = champs[Math.floor(Math.random() * champs.length)];
+    let nonLetters = word.split('').filter(letter => !allLetters.includes(letter.toUpperCase()))
+    setWord(word.charAt(0).toUpperCase() + word.substr(1).toLowerCase());
+    setGuessedLetters(nonLetters);
   }
 
   const addGuessLetter = useCallback((letter : string) => { 
@@ -31,10 +32,6 @@ function App() {
   },
   [guessedLetters]
   );
-
-  useEffect(() => {
-    setGuessedLetters(word.split('').filter((letter) => !allLetters.includes(letter.toUpperCase())));
-  },[word])
 
   useEffect(() => {
     if ( isGuessed ) { 
@@ -50,7 +47,7 @@ function App() {
       const key = e.key.toUpperCase();
 
       if (key.match(/^(ENTER)$/) && (isGuessed || currentGuesses >= maxGuesses)) {
-        resetHangman();
+        updateWord();
       }
 
       if (!key.match(/^[a-zA-Z]$/) || (isGuessed || currentGuesses >= maxGuesses)) return
@@ -73,7 +70,7 @@ function App() {
     <div className="resetBanner">
     <h2
     onClick={() => 
-      currentGuesses >= maxGuesses || isGuessed ? resetHangman() : ""
+      currentGuesses >= maxGuesses || isGuessed ? updateWord() : ""
     }>{currentGuesses >= maxGuesses ? <><span style={{color:"red"}}>You Lose.</span> Click here to or press enter to reset</> : 
     isGuessed ? 
     <><span style={{color:"green"}}>You Win.</span> Click here to or press enter to reset</> : 
