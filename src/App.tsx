@@ -53,7 +53,7 @@ function App() {
         resetHangman();
       }
 
-      if (!key.match(/^[a-zA-Z]$/)) return
+      if (!key.match(/^[a-zA-Z]$/) || (isGuessed || currentGuesses >= maxGuesses)) return
 
       addGuessLetter(key);
       
