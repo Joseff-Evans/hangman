@@ -13,7 +13,7 @@ function App() {
   const allLetters : string[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split('');
 
   const currentGuesses = guessedLetters.filter((letter) => !word.toUpperCase().includes(letter)).length;
-  const isGuessed = word.length === word.toUpperCase().split('').filter((letter) => guessedLetters.includes(letter)).length;
+  const isGuessed = word.length > 0 && word.length === word.toUpperCase().split('').filter((letter) => guessedLetters.includes(letter)).length;
 
   useEffect(() => {
     updateWord();
