@@ -71,7 +71,7 @@ function App() {
     <h2
     onClick={() => 
       currentGuesses >= maxGuesses || isGuessed ? updateWord() : ""
-    }>{currentGuesses >= maxGuesses ? <><span style={{color:"red"}}>You Lose.</span> Click here to or press enter to reset</> : 
+    }>{currentGuesses >= maxGuesses ? <><span style={{color:"red"}}>You Lose.</span> Click here or press enter to reset</> : 
     isGuessed ? 
     <><span style={{color:"green"}}>You Win.</span> Click here to or press enter to reset</> : 
     "\u00A0"
